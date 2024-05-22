@@ -1,29 +1,31 @@
 import {createWebHistory, createRouter} from 'vue-router'
 
+import Home from '../components/Home/index.vue';
+import Top from '../components/Top/index.vue';
+import Config from '../components/Config/index.vue';
+
+
 const routes = [
     {
         path: '/',
-        name: 'home',
-        component: () =>import("../components/Home/index.vue"),
-        meta: {
-            title: "首页"
-        }
+        redirect: '/index',
     },
     {
-        path: '/top',
-        name: 'top',
-        component: () =>import("../components/Top/index.vue"),
-        meta: {
-            title: "置顶"
-        }
+        path: '/index',
+        name: 'index',
+        component: Home,
+        children: [
+            {
+                path: 'top',
+                name: 'top',
+                component: Top,
+            },
+        ]
     },
     {
         path: '/config',
         name: 'config',
-        component: () =>import("../components/Config/index.vue"),
-        meta: {
-            title: "配置文件"
-        }
+        component: Config,
     },
 ]
 
