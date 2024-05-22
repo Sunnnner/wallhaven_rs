@@ -3,11 +3,12 @@
     "beforeDevCommand": "pnpm dev",
     "beforeBuildCommand": "pnpm build",
     "devPath": "http://localhost:1420",
-    "distDir": "../dist"
+    "distDir": "../dist",
+    "withGlobalTauri": false
   },
   "package": {
     "productName": "Wallpapers图片浏览器",
-    "version": "1.0.0"
+    "version": "1.0.2"
   },
   "tauri": {
     "allowlist": {
@@ -51,7 +52,8 @@
     },
     "bundle": {
       "active": true,
-      "targets": "all",
+      "category": "ImageBrowser",
+      "copyright": "",
       "identifier": "cn.com.rustcc",
       "icon": [
         "icons/32x32.png",
@@ -59,7 +61,27 @@
         "icons/128x128@2x.png",
         "icons/icon.icns",
         "icons/icon.ico"
-      ]
+      ],
+      "deb": {
+        "depends": []
+      },
+      "externalBin": [],
+      "longDescription": "",
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+      "resources": [],
+      "shortDescription": "",
+      "targets": "all",
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
     }
   }
 }
