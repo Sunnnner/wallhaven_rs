@@ -16,14 +16,14 @@ pub type Result<T> = std::result::Result<T, Error>;
 async fn get_top_wallpapers(page: i64, context: State<'_, Context>) -> WallResult<WallhavenResult> {
     let top = TopTag::new(
         111,
-        100, 
-        "1M".to_string(), 
+        110,
+        "6M".to_string(), 
         "toplist".to_string(), 
         "desc".to_string(), 
-        0, 
+        0,
         page
     );
-    Ok(top.get_top_page(context).await?)
+    top.get_top_page(context).await
 }
 
 fn _construct_new_url(src: &str) -> Result<String> {

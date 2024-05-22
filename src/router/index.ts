@@ -10,6 +10,14 @@ const routes = [
         }
     },
     {
+        path: '/top',
+        name: 'top',
+        component: () =>import("../components/Top/index.vue"),
+        meta: {
+            title: "置顶"
+        }
+    },
+    {
         path: '/config',
         name: 'config',
         component: () =>import("../components/Config/index.vue"),
