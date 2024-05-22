@@ -57,3 +57,4 @@ jobs:
           releaseBody: 'Wallpapers图片浏览器'
           releaseDraft: true
           prerelease: false
+          releaseId: ${{ needs.create-release.outputs.RELEASE_UPLOAD_ID }}
