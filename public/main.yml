@@ -17,7 +17,7 @@ jobs:
       RELEASE_UPLOAD_ID: ${{ steps.create_release.outputs.id }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       # 查询版本号（tag）
       - name: Query version number
         id: get_version
@@ -47,11 +47,11 @@ jobs:
 
     runs-on: ${{ matrix.platform }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       # 安装 Node.js
       - name: Setup node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: 16.19.1
       # 安装pnpm
@@ -61,12 +61,10 @@ jobs:
           version: 8.6.1
       # 安装 Rust
       - name: Install Rust stable
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
+        uses: dtolnay/rust-toolchain@stable
 
       # 使用 Rust 缓存，加快安装速度
-      - uses: Swatinem/rust-cache@v1
+      - uses: Swatinem/rust-cache@v2
 
       - name: install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-latest'
@@ -77,7 +75,7 @@ jobs:
       # 安装依赖执行构建，以及推送 github release
       - name: Install app dependencies and build it
         run: pnpm i && pnpm tauri build
-      - uses: tauri-apps/tauri-action@v0
+      - uses: tauri-apps/tauri-action@vdev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:

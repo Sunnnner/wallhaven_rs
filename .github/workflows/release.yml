@@ -47,7 +47,7 @@ jobs:
         run: pnpm install # Change this to npm, yarn or pnpm.
 
       - name: Build the app
-        uses: tauri-apps/tauri-action@v0
+        uses: tauri-apps/tauri-action@dev
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -55,5 +55,5 @@ jobs:
           tagName: v__VERSION__ # This only works if your workflow triggers on new tags.
           releaseName: 'Wallpapers v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
           releaseBody: 'Wallpapers图片浏览器'
-          releaseDraft: false
-          prerelease: true
+          releaseDraft: true
+          prerelease: false
