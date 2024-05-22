@@ -7,8 +7,8 @@
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "Wallpapers图片浏览器",
-    "version": "1.0.3"
+    "productName": "Wallpapers",
+    "version": "1.0.4"
   },
   "tauri": {
     "allowlist": {
