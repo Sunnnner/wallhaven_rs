@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "Wallpapers图片浏览器",
-    "version": "1.0.2"
+    "version": "1.0.3"
   },
   "tauri": {
     "allowlist": {
@@ -52,7 +52,7 @@
     },
     "bundle": {
       "active": true,
-      "category": "ImageBrowser",
+      "category": "Photography",
       "copyright": "",
       "identifier": "cn.com.rustcc",
       "icon": [
