@@ -23,6 +23,8 @@ pub enum Error {
     TomlError(#[from] toml::de::Error),
     #[error("Error: {0}")]
     TomeSerError(#[from] toml::ser::Error),
+    #[error("Error: {0}")]
+    ReqwestMiddlewareError(#[from] reqwest_middleware::Error),
 }
 
 // we must manually implement serde::Serialize

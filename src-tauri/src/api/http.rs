@@ -3,9 +3,13 @@ use reqwest::{
     Client,
 };
 
+use reqwest_middleware::{ClientBuilder, ClientWithMiddleware};
+use http_cache_reqwest::{Cache, CacheMode, CACacheManager, HttpCache, HttpCacheOptions};
+
+
 #[derive(Debug)]
 pub struct Context {
-    pub client: Client,
+    pub client: ClientWithMiddleware,
 }
 
 impl Context {
@@ -46,11 +50,17 @@ impl Context {
             .expect("Failed to create sec-fetch-site header"));
         
         Self {
-            client: Client::new(),
+            client: ClientBuilder::new(Client::new())
+                .with(Cache(HttpCache {
+                    mode: CacheMode::Default,
+                    manager: CACacheManager::default(),
+                    options: HttpCacheOptions::default(),
+                }))
+                .build()
         }
     }
     
-    pub fn http_client(&self) -> &Client {
+    pub fn http_client(&self) -> &ClientWithMiddleware {
         &self.client
     }
 }
