@@ -92,14 +92,16 @@ const load = () => {
 }
 
 function invokeAPI(apiMethod: string, newPage: number) {
+  // console.log(new Error("invokeAPI called").stack);
+  console.log('invokeAPI', newPage);
   invoke(apiMethod, {
     params: {
       categories: 111,
       purity: 110,
-      topRange: "6M",
-      sorting: "toplist",
-      order: "desc",
-      ai_art_filter: 0,
+      topRange: '',
+      sorting: "hot",
+      order: "asc",
+      ai_art_filter: 1,
       page: newPage
     }
   }).then((res: any) => {

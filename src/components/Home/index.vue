@@ -7,8 +7,10 @@
               mode="horizontal"
               :router="true"
           >
-            <el-menu-item index="/">主页</el-menu-item>
+            <el-menu-item index="/index/latest">主页</el-menu-item>
             <el-menu-item index="/index/top">排行榜</el-menu-item>
+            <el-menu-item index="/index/hot">热门</el-menu-item>
+            <el-menu-item index="/index/random">随机</el-menu-item>
             <el-menu-item @click="openConfig">
               <el-icon style="margin-right: 8px; margin-top: 1px">
                 <setting/>
@@ -29,7 +31,7 @@ import {Setting} from '@element-plus/icons-vue'
 import { ref } from 'vue'
 import {WebviewWindow} from "@tauri-apps/api/window";
 
-const activeIndex = ref('1')
+const activeIndex = ref("/index/top")
 
 const openConfig = async () => {
   const webview = new WebviewWindow('theUniqueLabel', {

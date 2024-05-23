@@ -96,10 +96,10 @@ function invokeAPI(apiMethod: string, newPage: number) {
     params: {
       categories: 111,
       purity: 110,
-      topRange: "6M",
-      sorting: "toplist",
+      topRange: '',
+      sorting: "date_added",
       order: "desc",
-      ai_art_filter: 0,
+      ai_art_filter: 1,
       page: newPage
     }
   }).then((res: any) => {

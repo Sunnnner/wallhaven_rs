@@ -15,7 +15,7 @@
       </el-col>
       <el-col :span="19">
         <div class="full-image-container">
-          <el-image :src="full_url" class="full-image"/>
+          <el-image :src="full_url" class="full-image" :style="{ maxHeight: imageMaxHeight }"/>
         </div>
       </el-col>
     </el-row>
@@ -70,7 +70,7 @@
 
 <script lang="ts" setup>
 import {invoke} from "@tauri-apps/api";
-import {ref, onMounted, reactive} from "vue";
+import {ref, onMounted, reactive, watch} from "vue";
 import {Download} from '@element-plus/icons-vue'
 import {sendNotification} from "@tauri-apps/api/notification";
 import {ElMessageBox} from 'element-plus'
@@ -86,20 +86,27 @@ const direction = ref<DrawerProps['direction']>('btt')
 const radio1 = ref('Option 1')
 const count = ref(1)
 const immediate = ref(false)
+const imageMaxHeight = ref((window.innerHeight - 200) + 'px');
 const load = () => {
   invokeAPI('get_top_wallpapers', count.value)
-
 }
+
+// 设置图片最大高度为视窗高度的一定比例
+function adjustImageSize() {
+  const heightPercentage = 0.95; // 可以调整这个百分比来改变图片占视窗的比例
+  imageMaxHeight.value = `${window.innerHeight * heightPercentage}px`;
+}
+
 
 function invokeAPI(apiMethod: string, newPage: number) {
   invoke(apiMethod, {
     params: {
       categories: 111,
       purity: 110,
-      topRange: "6M",
-      sorting: "toplist",
+      topRange: '',
+      sorting: "random",
       order: "desc",
-      ai_art_filter: 0,
+      ai_art_filter: 1,
       page: newPage
     }
   }).then((res: any) => {
@@ -159,6 +166,14 @@ function confirmClick() {
 
 onMounted(() => {
   invokeAPI('get_top_wallpapers', 1);
+  adjustImageSize(); // 初始调整
+  window.addEventListener('resize', adjustImageSize); // 窗口大小改变时调整
+});
+
+watch(() => full_url.value, (newVal, oldVal) => {
+  if (newVal !== oldVal) {
+    adjustImageSize(); // 当图片改变时也进行调整
+  }
 });
 
 </script>

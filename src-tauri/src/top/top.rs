@@ -22,26 +22,23 @@ pub struct TopTag {
 
 impl TopTag {
     pub fn new(
-        categories: i64,
-        purity: i64,
-        topRange: String,
-        sorting: String,
-        order: String,
-        ai_art_filter: i64,
-        page: i64,
+        self
     ) -> Self {
-        Self {
-            categories,
-            purity,
-            topRange,
-            sorting,
-            order,
-            ai_art_filter,
-            page,
-        }
+        self
     }
     pub fn get_url(&self) -> String {
-        format!("https://wallhaven.cc/search?categories={}&purity={}&topRange={}&sorting={}&order={}&ai_art_filter={}&page={}", self.categories, self.purity, self.topRange, self.sorting, self.order, self.ai_art_filter, self.page)
+        if self.topRange.is_empty() {
+            format!(
+                "https://wallhaven.cc/search?categories={}&purity={}&sorting={}&order={}&ai_art_filter={}&page={}",
+                self.categories, self.purity, self.sorting, self.order, self.ai_art_filter, self.page
+            )
+        } else {
+            format!(
+                "https://wallhaven.cc/search?categories={}&purity={}&topRange={}&sorting={}&order={}&ai_art_filter={}&page={}",
+                self.categories, self.purity, self.topRange, self.sorting, self.order, self.ai_art_filter, self.page
+            )
+        }
+        // format!("https://wallhaven.cc/search?categories={}&purity={}&topRange={}&sorting={}&order={}&ai_art_filter={}&page={}", self.categories, self.purity, self.topRange, self.sorting, self.order, self.ai_art_filter, self.page)
     }
 
     pub async fn get_top_page(&self, context: State<'_, Context>) -> WallResult<WallhavenResult> {

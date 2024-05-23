@@ -12,17 +12,12 @@ use wallhaven_rs::top::interface::{WallhavenResult};
 
 pub type Result<T> = std::result::Result<T, Error>;
 
+
 #[tauri::command(rename_all = "snake_case")]
-async fn get_top_wallpapers(page: i64, context: State<'_, Context>) -> WallResult<WallhavenResult> {
-    let top = TopTag::new(
-        111,
-        110,
-        "6M".to_string(), 
-        "toplist".to_string(), 
-        "desc".to_string(), 
-        0,
-        page
-    );
+async fn get_top_wallpapers(
+    params: TopTag,
+    context: State<'_, Context>) -> WallResult<WallhavenResult> {
+    let top = TopTag::new(params);
     top.get_top_page(context).await
 }
 
