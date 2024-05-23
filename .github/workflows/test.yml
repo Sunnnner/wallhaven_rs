@@ -43,12 +43,12 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: 16.14.2
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v3
+        uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 8.6.1
           run_install: false
 
       - name: Pnpm install

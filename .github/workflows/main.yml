@@ -17,7 +17,7 @@ jobs:
       RELEASE_UPLOAD_ID: ${{ steps.create_release.outputs.id }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       # 查询版本号（tag）
       - name: Query version number
         id: get_version
@@ -47,16 +47,16 @@ jobs:
 
     runs-on: ${{ matrix.platform }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       # 安装 Node.js
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 16.19.1
       # 安装pnpm
       - name: setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
           version: 8.6.1
       # 安装 Rust
