@@ -54,7 +54,7 @@ jobs:
         with:
           tagName: v__VERSION__ # This only works if your workflow triggers on new tags.
           releaseName: 'Wallpapers v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
-          releaseBody: 'Wallpapers图片浏览器'
+          releaseBody: 'fix bugs and add new features'
           releaseDraft: false
-          prerelease: true
+          prerelease: false
           releaseId: ${{ needs.create-release.outputs.RELEASE_UPLOAD_ID }}

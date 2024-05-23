@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "Wallpapers",
-    "version": "1.1.1"
+    "version": "1.1.2"
   },
   "tauri": {
     "allowlist": {
@@ -76,7 +76,7 @@
       },
       "resources": [],
       "shortDescription": "",
-      "targets": ["deb", "msi", "dmg", "app"],
+      "targets": "all",
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
