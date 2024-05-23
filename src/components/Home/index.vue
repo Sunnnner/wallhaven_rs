@@ -1,7 +1,6 @@
 <template>
-  <el-card>
-    <el-container>
-      <el-header style="text-align: right; font-size: 12px">
+    <el-container class="container">
+      <el-header style="text-align: right; font-size: 12px; height: 2rem"  >
           <el-menu
               :default-active="activeIndex"
               mode="horizontal"
@@ -19,11 +18,10 @@
             </el-menu-item>
           </el-menu>
       </el-header>
-      <el-main>
+      <el-main style="flex: 1;overflow: hidden">
           <router-view/>
       </el-main>
     </el-container>
-  </el-card>
 </template>
 
 <script lang="ts" setup>
@@ -50,4 +48,9 @@ const openConfig = async () => {
 </script>
 
 <style scoped>
+  .container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column
+  }
 </style>

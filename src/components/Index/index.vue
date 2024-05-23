@@ -2,7 +2,7 @@
   <div class="wallpaper-browser">
     <el-row>
       <el-col :span="5">
-        <ul v-infinite-scroll="load" class="infinite-list" :style="{overflow: 'auto', height: sc_height}"
+        <ul v-infinite-scroll="load" class="infinite-list" :style="{overflow: 'hidden', height: sc_height}"
             :infinite-scroll-immediate="immediate">
           <li v-for="fit in fits" :key="fit.name" class="thumbnail-container">
             <el-image
@@ -79,7 +79,7 @@ import type {DrawerProps} from 'element-plus'
 const fits = reactive<any[]>([]);
 const full_url = ref('');
 const full_name = ref('');
-const sc_height = ref((window.innerHeight - 200) + 'px');
+const sc_height = ref((window.innerHeight ) + 'px');
 const drawer = ref(false)
 const drawer2 = ref(false)
 const direction = ref<DrawerProps['direction']>('btt')
@@ -163,7 +163,7 @@ onMounted(() => {
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .wallpaper-browser {
   .infinite-list {
     padding: 0;
@@ -190,17 +190,20 @@ onMounted(() => {
     justify-content: center;
     align-items: center; // 垂直居中
     height: 100%; // 确保容器占满父元素的高度
-  }
-
-  .thumbnail-image, .full-image {
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    object-fit: contain; // 保持图片的宽高比
-
-    &:hover {
-      transform: scale(1.1);
+    .full-image {
+      height: 100%; // 确保图片占满容器的高度
     }
   }
+
+  //.thumbnail-image, .full-image {
+  //  cursor: pointer;
+  //  transition: transform 0.3s ease;
+  //  object-fit: contain; // 保持图片的宽高比
+  //
+  //  &:hover {
+  //    transform: scale(1.1);
+  //  }
+  //}
 
   .wallpaper-page {
     //固定底部中间

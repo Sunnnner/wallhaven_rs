@@ -163,7 +163,7 @@ onMounted(() => {
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .wallpaper-browser {
   .infinite-list {
     padding: 0;
