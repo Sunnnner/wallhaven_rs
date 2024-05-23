@@ -35,7 +35,7 @@ jobs:
         with:
           tag_name: '${{ steps.get_version.outputs.VERSION }}'
           release_name: 'Wallpapers ${{ steps.get_version.outputs.VERSION }}'
-          body: 'Wallpapers图片浏览器'
+          body: 'Release ${{ steps.get_version.outputs.VERSION }}'
 
   # 编译 Tauri
   build-tauri:
