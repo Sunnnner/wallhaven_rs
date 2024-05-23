@@ -70,3 +70,4 @@ jobs:
           releaseBody: 'fix bugs and add new features'
           releaseDraft: false
           prerelease: false
+          releaseId: ${{ needs.create-release.outputs.RELEASE_UPLOAD_ID }}

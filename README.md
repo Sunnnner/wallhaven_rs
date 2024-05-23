@@ -5,10 +5,15 @@
 - 界面显示不怎么好请谅解后期会修复
 
 - ✅ Toplist
-- ❎ Latest
-- ❎ Random
+- ✅ Latest
+- ✅ Random
+- ✅ Hot
 - ❎ Search
 
+- ❎ 分辨率
+- ❎ 颜色
+- ❎ 热门列表
+- ❎ top日期选项
 
 ## 使用
 
