@@ -12,6 +12,7 @@ on:
 jobs:
   # 任务：创建 release 版本
   create-release:
+    permissions: write-all
     runs-on: ubuntu-latest
     outputs:
       RELEASE_UPLOAD_ID: ${{ steps.create_release.outputs.id }}
