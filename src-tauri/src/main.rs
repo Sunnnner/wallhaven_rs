@@ -5,6 +5,8 @@ use tauri::State;
 use wallhaven_rs::api::http::Context;
 use wallhaven_rs::config::interface::Config;
 use wallhaven_rs::download::download::Download;
+use wallhaven_rs::tags::interface::TagsResult;
+use wallhaven_rs::tags::tags::Tags;
 use wallhaven_rs::top::top::TopTag;
 use wallhaven_rs::utils::error::{Error, WallResult};
 use wallhaven_rs::top::interface::{WallhavenResult};
@@ -46,6 +48,12 @@ async fn download_wallpaper(url: String, file_name: String, context: State<'_, C
     download.save(context).await
 }
 
+#[tauri::command(rename_all = "snake_case")]
+async fn get_tags(params: Tags, context: State<'_, Context>) -> WallResult<TagsResult> {
+    let tags = Tags::new(params);
+    tags.get_content(context).await
+}
+
 fn main() {
     let context = Context::default();
     tauri::Builder::default()
@@ -54,7 +62,8 @@ fn main() {
             get_top_wallpapers,
             save_config,
             load_config,
-            download_wallpaper
+            download_wallpaper,
+            get_tags
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

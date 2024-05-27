@@ -10,6 +10,7 @@
             <el-menu-item index="/index/top">排行榜</el-menu-item>
             <el-menu-item index="/index/hot">热门</el-menu-item>
             <el-menu-item index="/index/random">随机</el-menu-item>
+            <el-menu-item index="/index/tags">标签</el-menu-item>
             <el-menu-item @click="openConfig">
               <el-icon style="margin-right: 8px; margin-top: 1px">
                 <setting/>

@@ -6,6 +6,7 @@ import Top from '../components/Top/index.vue';
 import Hot from '../components/Hot/index.vue';
 import random from '../components/Random/index.vue';
 import Config from '../components/Config/index.vue';
+import Tags from '../components/Tags/index.vue';
 
 
 const routes = [
@@ -37,7 +38,12 @@ const routes = [
                 path: 'random',
                 name: 'random',
                 component: random,
-            }
+            },
+            {
+                path: 'tags',
+                name: 'tags',
+                component: Tags,
+            },
         ]
     },
     {
