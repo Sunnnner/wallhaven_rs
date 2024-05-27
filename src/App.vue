@@ -9,13 +9,8 @@ import { RouterView } from 'vue-router'
     <RouterView />
 </template>
 
-<style scoped>
-.logo.vite:hover {
-  filter: drop-shadow(0 0 2em #747bff);
+<style>
+html,body,#app{
+  height: 100%;
 }
-
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #249b73);
-}
-
 </style>

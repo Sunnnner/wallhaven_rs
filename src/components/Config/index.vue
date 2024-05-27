@@ -59,7 +59,7 @@ onMounted(async () => {
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .input-with-transition, .button-with-transition {
   transition: all 0.3s ease-in-out;
 }

@@ -1,6 +1,6 @@
 <template>
     <el-container class="container">
-      <el-header style="text-align: right; font-size: 12px; height: 2rem"  >
+      <el-header>
           <el-menu
               :default-active="activeIndex"
               mode="horizontal"
@@ -18,7 +18,7 @@
             </el-menu-item>
           </el-menu>
       </el-header>
-      <el-main style="flex: 1;overflow: hidden">
+      <el-main style="overflow: hidden">
           <router-view/>
       </el-main>
     </el-container>
@@ -47,10 +47,10 @@ const openConfig = async () => {
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   .container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
   }
 </style>
