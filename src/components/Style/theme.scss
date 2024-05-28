@@ -36,7 +36,8 @@
       object-fit: contain;
     }
   }
-  .thumbnail-image, .full-image{
+//, .full-image
+  .thumbnail-image{
     cursor: pointer;
     transition: transform 0.3s ease;
     object-fit: contain; // 保持图片的宽高比
