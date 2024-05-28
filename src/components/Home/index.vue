@@ -16,6 +16,14 @@
               </el-icon>
               配置
             </el-menu-item>
+            <el-menu-item >
+                <!--github 链接以及图标-->
+                <a href="https://github.com/Sunnnner/wallhaven_rs" target="_blank">
+                  <el-icon style="margin-right: 8px; margin-top: 1px">
+                    <el-image src="https://img.icons8.com/ios-glyphs/30/000000/github.png"/>
+                  </el-icon>
+                </a>
+            </el-menu-item>
           </el-menu>
       </el-header>
       <el-main style="overflow: hidden">
@@ -29,7 +37,7 @@ import {Setting} from '@element-plus/icons-vue'
 import { ref } from 'vue'
 import {WebviewWindow} from "@tauri-apps/api/window";
 
-const activeIndex = ref("/index/top")
+const activeIndex = ref("/index/latest")
 
 const openConfig = async () => {
   const webview = new WebviewWindow('theUniqueLabel', {

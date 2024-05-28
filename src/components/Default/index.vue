@@ -6,6 +6,7 @@
           <el-image
               class="thumbnail-image"
               :src="fit.url"
+              fit="contain"
               @click="selectImage(fit)"
           />
         </li>

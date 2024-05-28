@@ -36,14 +36,11 @@
       object-fit: contain;
     }
   }
-//, .full-image
-  .thumbnail-image{
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    object-fit: contain; // 保持图片的宽高比
 
+  .thumbnail-image{
+    transition: border 0.1s;
     &:hover {
-      transform: scale(1.1);
+      border: 5px solid #409EFF;
     }
   }
 
