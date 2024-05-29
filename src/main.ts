@@ -6,6 +6,11 @@ import router from './router';
 
 const app = createApp(App)
 
+
+document.oncontextmenu = function () {
+    return false;
+}
+
 app.use(ElementPlus)
 app.use(router)
 app.mount('#app')
