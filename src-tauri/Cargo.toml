@@ -22,7 +22,6 @@ log = "^0.4"
 scraper = "0.18.1"
 thiserror = "1.0.61"
 toml = "0.8.13"
-chrono = "0.4.38"
 
 [features]
 # This feature is used for production builds or when a dev server is not specified, DO NOT REMOVE!!

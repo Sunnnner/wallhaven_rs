@@ -1,4 +1,5 @@
 use std::io::Write;
+use http_cache_reqwest::CacheMode;
 use tauri::State;
 use crate::api::http::Context;
 use crate::config::interface::Config;
@@ -23,7 +24,7 @@ impl Download {
         let download_path = Config::load()?.download_path;
         let download_path = std::path::Path::new(&download_path).join(&self.file_name);
         let client = context.http_client();
-        let mut response = client.get(&self.url).send().await?;
+        let mut response = client.get(&self.url).with_extension(CacheMode::NoStore).send().await?;
         let mut file = std::fs::File::create(download_path)?;
         while let Some(chunk) = response.chunk().await? {
             file.write_all(&chunk)?;

@@ -52,7 +52,7 @@ impl Context {
         Self {
             client: ClientBuilder::new(Client::new())
                 .with(Cache(HttpCache {
-                    mode: CacheMode::Default,
+                    mode: CacheMode::ForceCache,
                     manager: CACacheManager::default(),
                     options: HttpCacheOptions::default(),
                 }))
