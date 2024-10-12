@@ -3,9 +3,8 @@ use reqwest::{
     Client,
 };
 
+use http_cache_reqwest::{CACacheManager, Cache, CacheMode, HttpCache, HttpCacheOptions};
 use reqwest_middleware::{ClientBuilder, ClientWithMiddleware};
-use http_cache_reqwest::{Cache, CacheMode, CACacheManager, HttpCache, HttpCacheOptions};
-
 
 #[derive(Debug)]
 pub struct Context {
@@ -36,19 +35,32 @@ impl Context {
             HeaderValue::from_str("gzip, deflate, br, zstd")
                 .expect("Failed to create accept encoding header"),
         );
-        headers.insert("sec-ch-ua", HeaderValue::from_str("\"Chromium\";v=\"94\", \";Not A Brand\";v=\"99\"")
-            .expect("Failed to create sec-ch-ua header"));
-        headers.insert("sec-ch-ua-mobile", HeaderValue::from_str("?0")
-            .expect("Failed to create sec-ch-ua-mobile header"));
-        headers.insert("sec-ch-ua-platform", HeaderValue::from_str("\"macOS\"")
-            .expect("Failed to create sec-ch-ua-platform header"));
-        headers.insert("sec-fetch-dest", HeaderValue::from_str("empty")
-            .expect("Failed to create sec-fetch-dest header"));
-        headers.insert("sec-fetch-mode", HeaderValue::from_str("cors")
-            .expect("Failed to create sec-fetch-mode header"));
-        headers.insert("sec-fetch-site", HeaderValue::from_str("same-origin")
-            .expect("Failed to create sec-fetch-site header"));
-        
+        headers.insert(
+            "sec-ch-ua",
+            HeaderValue::from_str("\"Chromium\";v=\"94\", \";Not A Brand\";v=\"99\"")
+                .expect("Failed to create sec-ch-ua header"),
+        );
+        headers.insert(
+            "sec-ch-ua-mobile",
+            HeaderValue::from_str("?0").expect("Failed to create sec-ch-ua-mobile header"),
+        );
+        headers.insert(
+            "sec-ch-ua-platform",
+            HeaderValue::from_str("\"macOS\"").expect("Failed to create sec-ch-ua-platform header"),
+        );
+        headers.insert(
+            "sec-fetch-dest",
+            HeaderValue::from_str("empty").expect("Failed to create sec-fetch-dest header"),
+        );
+        headers.insert(
+            "sec-fetch-mode",
+            HeaderValue::from_str("cors").expect("Failed to create sec-fetch-mode header"),
+        );
+        headers.insert(
+            "sec-fetch-site",
+            HeaderValue::from_str("same-origin").expect("Failed to create sec-fetch-site header"),
+        );
+
         Self {
             client: ClientBuilder::new(Client::new())
                 .with(Cache(HttpCache {
@@ -56,15 +68,14 @@ impl Context {
                     manager: CACacheManager::default(),
                     options: HttpCacheOptions::default(),
                 }))
-                .build()
+                .build(),
         }
     }
-    
+
     pub fn http_client(&self) -> &ClientWithMiddleware {
         &self.client
     }
 }
-
 
 impl Default for Context {
     fn default() -> Self {

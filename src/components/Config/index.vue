@@ -10,9 +10,11 @@
 </template>
 
 <script lang="ts" setup>
-import {onMounted, reactive, ref} from 'vue'
-import {dialog, invoke} from "@tauri-apps/api";
-import { isPermissionGranted, sendNotification } from '@tauri-apps/api/notification';
+import {onMounted, reactive, ref} from 'vue';
+import { invoke } from "@tauri-apps/api/core";
+import { isPermissionGranted, sendNotification } from '@tauri-apps/plugin-notification';
+// import * as dialog from "@tauri-apps/plugin-dialog";
+import { open } from "@tauri-apps/plugin-dialog";
 
 const default_path = ref('');
 
@@ -28,7 +30,7 @@ const form = reactive({
 })
 
 async function open_path() {
-  const result: any = await dialog.open({
+  const result: any = await open({
     directory: true,
     defaultPath: '.'
   });

@@ -37,10 +37,10 @@
 </template>
 
 <script lang="ts" setup>
-import {invoke} from "@tauri-apps/api";
+import { invoke } from "@tauri-apps/api/core";
 import {ref, onMounted, reactive, toRefs, PropType} from "vue";
 import {Download} from '@element-plus/icons-vue'
-import {sendNotification} from "@tauri-apps/api/notification";
+import {sendNotification} from "@tauri-apps/plugin-notification";
 
 interface infoRef {
   categories: number,

@@ -1,9 +1,9 @@
-use scraper::Selector;
-use serde::{Deserialize, Serialize};
-use tauri::State;
 use crate::api::http::Context;
 use crate::tags::interface::{TagsBase, TagsResult};
 use crate::utils::error::{Error, WallResult};
+use scraper::Selector;
+use serde::{Deserialize, Serialize};
+use tauri::State;
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Tags {
@@ -11,11 +11,8 @@ pub struct Tags {
     pub categories: Option<String>,
 }
 
-
 impl Tags {
-    pub fn new(
-        self
-    ) -> Self {
+    pub fn new(self) -> Self {
         self
     }
 
@@ -26,12 +23,9 @@ impl Tags {
                     "https://wallhaven.cc/tags/{}?page={}",
                     categories, self.page
                 )
-            },
+            }
             None => {
-                format!(
-                    "https://wallhaven.cc/tags?page={}",
-                    self.page
-                )
+                format!("https://wallhaven.cc/tags?page={}", self.page)
             }
         }
     }
@@ -66,15 +60,16 @@ impl Tags {
                 .select(&tag_info)
                 .next()
                 .ok_or(Error::new("tag info not found"))?;
-            let url = info_url.value().attr("href").ok_or(Error::new("tag info url not found"))?;
+            let url = info_url
+                .value()
+                .attr("href")
+                .ok_or(Error::new("tag info url not found"))?;
             let name = info_url.text().collect::<Vec<_>>().join(" ");
             response.push(TagsBase {
                 name,
                 url: url.to_string(),
             });
-
         }
-        Ok( response )
+        Ok(response)
     }
-
 }

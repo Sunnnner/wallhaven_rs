@@ -18,12 +18,8 @@ pub struct TopTag {
     pub page: i64,
 }
 
-
-
 impl TopTag {
-    pub fn new(
-        self
-    ) -> Self {
+    pub fn new(self) -> Self {
         self
     }
     pub fn get_url(&self) -> String {

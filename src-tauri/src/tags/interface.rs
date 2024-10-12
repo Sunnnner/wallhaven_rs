@@ -1,5 +1,3 @@
-
-
 #[derive(serde::Serialize, serde::Deserialize, Debug, Clone)]
 pub struct TagsBase {
     pub name: String,

@@ -39,7 +39,7 @@
 
 <script lang="ts" setup>
 import {View as IconView} from '@element-plus/icons-vue'
-import {invoke} from "@tauri-apps/api";
+import { invoke } from "@tauri-apps/api/core";
 import {ref} from "vue";
 
 const count = ref(1)

@@ -1,4 +1,3 @@
-
 #[derive(Debug, serde::Serialize, serde::Deserialize, Clone)]
 pub struct WallhavenResponse {
     pub name: String,

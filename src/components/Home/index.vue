@@ -36,12 +36,12 @@
 <script lang="ts" setup>
 import {Setting} from '@element-plus/icons-vue'
 import { ref } from 'vue'
-import {WebviewWindow} from "@tauri-apps/api/window";
+import {WebviewWindow} from "@tauri-apps/api/webviewWindow";
 
 const activeIndex = ref("/index/latest")
 
 const openConfig = async () => {
-  const webview = new WebviewWindow('theUniqueLabel', {
+  const webview = new WebviewWindow('settings', {
     url: '/config',
     title: '用户配置',
     width: 300,
@@ -50,8 +50,7 @@ const openConfig = async () => {
   });
   await webview.once('tauri://created', function () {
     console.log('webview created')
-  })
-
+  });
 }
 
 </script>
