@@ -20,7 +20,7 @@ const routes = [
         children: [
             {
                 path: 'latest',
-                name: 'index',
+                name: 'latest',
                 component: Index,
             },
             {

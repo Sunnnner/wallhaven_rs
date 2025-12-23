@@ -19,5 +19,5 @@ const parentMsg = reactive({
 </script>
 
 <style lang="scss" >
-@import '../Style/theme.scss';
+@use '../Style/theme.scss';
 </style>
