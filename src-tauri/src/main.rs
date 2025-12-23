@@ -42,8 +42,18 @@ async fn load_config() -> WallResult<Config> {
 
 #[tauri::command(rename_all = "snake_case")]
 async fn download_wallpaper(url: String, file_name: String, context: State<'_, Context>) -> WallResult<()> {
+    println!("开始下载: {} -> {}", url, file_name);
     let download = Download::new(url, file_name);
-    download.save(context).await
+    match download.save(context).await {
+        Ok(_) => {
+            println!("下载完成");
+            Ok(())
+        }
+        Err(e) => {
+            eprintln!("下载失败: {:?}", e);
+            Err(e)
+        }
+    }
 }
 
 fn main() {

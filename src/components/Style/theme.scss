@@ -2,55 +2,274 @@
   height: 100%;
   display: flex;
   overflow: hidden;
+  position: relative;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+
   .left {
-    width: 300px;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.08);
+    position: relative;
+    transition: width 0.3s ease;
+
+    .sidebar-header {
+      padding: 16px;
+      border-bottom: 1px solid #e4e7ed;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fafafa;
+
+      .title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #303133;
+      }
+    }
+
+    .resize-handle {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      cursor: col-resize;
+      background: transparent;
+      transition: background 0.2s;
+
+      &:hover {
+        background: #409EFF;
+      }
+    }
   }
+
   .infinite-list {
     display: block;
-    padding: 0;
+    padding: 8px;
     margin: 0;
     list-style: none;
-    overflow: auto;
-    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+
+      &:hover {
+        background: #a8a8a8;
+      }
+    }
   }
 
-  //background-color: #CCFFFF; // 添加科技感背景色
-
   .thumbnail-container {
-    margin: 0 10px 10px 10px;
+    margin: 0 0 12px 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: auto;
-  }
-
-  .full-image-container {
-    flex: 1;
-    height: 100%;
-    width: 100%;
+    border-radius: 8px;
     overflow: hidden;
-    .full-image {
-      height: 100%;
+    position: relative;
+    
+    &.selected {
+      .thumbnail-wrapper {
+        border: 3px solid #67c23a;
+        box-shadow: 0 4px 12px rgba(103, 194, 58, 0.3);
+      }
+    }
+
+    &.active {
+      .thumbnail-wrapper {
+        border: 3px solid #409EFF;
+        box-shadow: 0 4px 12px rgba(64, 158, 255, 0.3);
+      }
+    }
+
+    .thumbnail-wrapper {
+      position: relative;
       width: 100%;
-      object-fit: contain;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: #f5f7fa;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+
+        .thumbnail-overlay {
+          opacity: 1;
+        }
+      }
+
+      .thumbnail-image {
+        width: 100%;
+        height: 180px;
+        display: block;
+
+        .image-error {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          font-size: 48px;
+          color: #c0c4cc;
+        }
+      }
+
+      .thumbnail-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, 
+          rgba(0, 0, 0, 0.5) 0%, 
+          rgba(0, 0, 0, 0) 40%, 
+          rgba(0, 0, 0, 0) 60%, 
+          rgba(0, 0, 0, 0.6) 100%
+        );
+        opacity: 0;
+        transition: opacity 0.3s;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 8px;
+
+        .select-checkbox {
+          align-self: flex-start;
+        }
+
+        .thumbnail-info {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          
+          .resolution {
+            color: #fff;
+            font-size: 12px;
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+          }
+        }
+      }
     }
   }
 
-  .thumbnail-image{
-    transition: border 0.1s;
+  .right-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .empty-state {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-viewer {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .toolbar {
+      padding: 16px 20px;
+      background: #ffffff;
+      border-bottom: 1px solid #e4e7ed;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+      .image-info {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex: 1;
+        overflow: hidden;
+
+        .el-tag {
+          max-width: 300px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      .toolbar-actions {
+        display: flex;
+        gap: 12px;
+      }
+    }
+
+    .full-image-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #f5f7fa;
+      padding: 20px;
+
+      .full-image {
+        max-height: 100%;
+        max-width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      }
+    }
+
+    .bottom-controls {
+      padding: 16px 20px;
+      background: #ffffff;
+      border-top: 1px solid #e4e7ed;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+
+      .fit-controls {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .navigation {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+
+        .nav-info {
+          font-size: 14px;
+          color: #606266;
+          min-width: 80px;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .float-button {
+    transition: all 0.3s ease;
+
     &:hover {
-      border: 5px solid #409EFF;
+      background-color: #409EFF !important;
+      transform: translateY(-3px);
     }
   }
-
-  .float-button, {
-    transition: background-color 0.3s, transform 0.3s;
-
-    &:hover {
-      background-color: #a4d7e1; // 鼠标悬停时变更背景色
-      transform: translateY(-3px); // 轻微升起效果
-    }
-  }
-
 }

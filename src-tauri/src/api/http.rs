@@ -5,6 +5,7 @@ use reqwest::{
 
 use reqwest_middleware::{ClientBuilder, ClientWithMiddleware};
 use http_cache_reqwest::{Cache, CacheMode, CACacheManager, HttpCache, HttpCacheOptions};
+use tauri::api::path::cache_dir;
 
 
 #[derive(Debug)]
@@ -49,11 +50,28 @@ impl Context {
         headers.insert("sec-fetch-site", HeaderValue::from_str("same-origin")
             .expect("Failed to create sec-fetch-site header"));
         
+        // 获取系统缓存目录
+        let cache_path = cache_dir()
+            .map(|p| p.join("wallhaven_rs").join("http-cache"))
+            .unwrap_or_else(|| {
+                // 如果获取失败，使用临时目录
+                std::env::temp_dir().join("wallhaven_rs").join("http-cache")
+            });
+        
+        // 确保缓存目录存在
+        if let Err(e) = std::fs::create_dir_all(&cache_path) {
+            eprintln!("创建缓存目录失败: {}", e);
+        }
+        
+        println!("HTTP 缓存目录: {:?}", cache_path);
+        
         Self {
             client: ClientBuilder::new(Client::new())
                 .with(Cache(HttpCache {
                     mode: CacheMode::ForceCache,
-                    manager: CACacheManager::default(),
+                    manager: CACacheManager {
+                        path: cache_path,
+                    },
                     options: HttpCacheOptions::default(),
                 }))
                 .build()
